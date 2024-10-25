@@ -1,0 +1,31 @@
+sender.sol -> polygon
+    router: 0x9C32fCB86BF0f4a1A8921a9Fe46de3198bb884B2
+    link: 0x0Fd9e8d3aF1aaee056EB9e802c3A762a667b1904
+    usdc: 0x41e94eb019c0762f9bfcf9fb1e58725bfb0e7582
+    destinationChainSeclector: 14767482510784806043
+    contract: 0x719e064319Df1cF9bC8AF9aEE11eB809D47aBa02 
+    (https://amoy.polygonscan.com/address/0x719e064319Df1cF9bC8AF9aEE11eB809D47aBa02)
+
+receiver.sol -> avax
+    router: 0xF694E193200268f9a4868e4Aa017A0118C9a8177
+    link: 0x0b9d5D9136855f6FEc3c0993feE6E9CE8a297846
+    usdc: 0x5425890298aed601595a70ab815c96711a31bc65
+    senderChainSelector: 16281711391670634445
+    contract: 0xe60cA94085Fa6c0d9D1deC5D0340aF79b6E8B94E
+    (https://testnet.snowscan.xyz/address/0xe60cA94085Fa6c0d9D1deC5D0340aF79b6E8B94E)
+
+stake.sol -> avax
+    contract: 0xE259397b34D0549d8418A7A2E5DB4bAd8c874c0e
+    (https://testnet.snowscan.xyz/address/0xE259397b34D0549d8418A7A2E5DB4bAd8c874c0e)
+
+
+Deploy "sender.sol" in Polygon Amoy Testnet using "senderDeploy.s.sol";
+Deploy "receiver.sol" in Avalanche Fuji Testnet using "receiverDeploy.s.sol";
+Deploy "stake.sol" in Avalanche Fuji Testnet using "stakeDeploy.s.sol";
+
+
+forge clean
+forge build
+source .env
+forge script script/senderDeploy.s.sol --rpc-url $POL --private-key $PK --broadcast
+forge script script/receiverDeploy.s.sol --rpc-url $AVAX --private-key $PK --broadcast
