@@ -1,54 +1,14 @@
-# list of all functions in your `Sender` contract that access parameters, along with their visibility (either `public` or `onlyOwner`):
+# Overview of Functions in the `Receiver` Contract
 
-### Functions and Their Parameters
+## **Constructor**
 
-1. **Constructor**
-   - **Parameters:** 
-     - `address _router`
-     - `address _link`
-     - `address _usdcToken`
-   - **Visibility:** No specific visibility modifier (constructor)
+- **Function:** `constructor(address _router, address _usdcToken, address _staker)`
+  - **Purpose:** Initializes the contract with specific addresses for the router, USDC token, and staker contract. It also approves the staker to spend USDC tokens on behalf of the contract.
 
-2. **setReceiverForDestinationChain**
-   - **Parameters:**
-     - `uint64 _destinationChainSelector`
-     - `address _receiver`
-   - **Visibility:** `onlyOwner`
+## **Sender Management Functions**
 
-3. **setGasLimitForDestinationChain**
-   - **Parameters:**
-     - `uint64 _destinationChainSelector`
-     - `uint256 _gasLimit`
-   - **Visibility:** `onlyOwner`
-
-4. **deleteReceiverForDestinationChain**
-   - **Parameters:**
-     - `uint64 _destinationChainSelector`
-   - **Visibility:** `onlyOwner`
-
-5. **sendMessagePayLINK**
-   - **Parameters:**
-     - `uint64 _destinationChainSelector`
-     - `address _beneficiary`
-     - `uint256 _amount`
-   - **Visibility:** `onlyOwner`
-   - **Returns:** `bytes32 messageId`
-
-6. **withdrawLinkToken**
-   - **Parameters:**
-     - `address _beneficiary`
-   - **Visibility:** `onlyOwner`
-
-7. **withdrawUsdcToken**
-   - **Parameters:**
-     - `address _beneficiary`
-   - **Visibility:** `onlyOwner`
-
-### Summary of Function Access
-- **Only Owner Functions:** These functions can only be called by the contract owner:
-  - `setReceiverForDestinationChain`
-  - `setGasLimitForDestinationChain`
-  - `deleteReceiverForDestinationChain`
-  - `sendMessagePayLINK`
-  - `withdrawLinkToken`
-  - `withdrawUsdcToken`
+- **Function:** `setSenderForSourceChain(uint64 _sourceChainSelector, address _sender)`
+  - **Purpose:** Sets the sender contract for a specified source chain. Only callable by the owner.
+  
+- **Function:** `deleteSenderForSourceChain(uint64 _sourceChainSelector)`
+  - **Purpose:** Deletes the sender contract for a specified source chain. Only callable by the owner.

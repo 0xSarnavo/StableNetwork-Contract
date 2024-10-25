@@ -1,50 +1,21 @@
-# List of the `Staker` contract, which facilitates staking and redeeming USDC tokens using ERC20 tokens:
+# Overview of Functions in the `Staker` Contract
 
-### Contract Overview
+## **Constructor**
 
-- **Name:** `Staker`
-- **Inherits From:** `ERC20`
-- **Implements:** `IStaker` interface
+- **Function:** `constructor(address _usdcToken)`
+  - **Purpose:** Initializes the contract with the USDC token address. It checks that the address is valid and retrieves the number of decimals for the token.
 
-### Key Features
+## **Staking Function**
 
-1. **Token Management:**
-   - The contract manages an ERC20 token (in this case, USDC) that users can stake and redeem.
-   - It keeps track of how many tokens each user has staked by minting its own `STK` tokens.
+- **Function:** `stake(address _beneficiary, uint256 _amount)`
+  - **Purpose:** Allows users to stake USDC tokens. It transfers the specified amount from the sender to the contract and mints an equivalent amount of Staker tokens for the beneficiary.
+  - **Checks:**
+    - Ensures that the beneficiary address is not zero.
+    - Ensures that the amount is greater than zero.
 
-2. **Errors:**
-   - Defines custom errors for various conditions, such as:
-     - Invalid token address
-     - Invalid beneficiary address
-     - Invalid amount for staking or redeeming
-     - Attempting to redeem when there are no tokens to redeem
+## **Redeeming Function**
 
-3. **Events:**
-   - Emits events for staking and redeeming, allowing tracking of actions within the contract:
-     - `UsdcStaked`
-     - `UsdcRedeemed`
-
-### Functions
-
-1. **Constructor:**
-   - Takes the address of the USDC token as a parameter.
-   - Checks if the address is valid and retrieves the number of decimals from the USDC token.
-
-2. **stake:**
-   - Allows users to stake a specified amount of USDC.
-   - Checks if the beneficiary address and the amount are valid.
-   - Transfers USDC from the sender to the contract and mints corresponding `STK` tokens for the beneficiary.
-   - Emits the `UsdcStaked` event.
-
-3. **redeem:**
-   - Allows users to redeem their staked tokens for USDC.
-   - Checks if the caller has a non-zero balance of `STK` tokens.
-   - Burns the `STK` tokens and transfers the equivalent amount of USDC back to the user.
-   - Emits the `UsdcRedeemed` event.
-
-4. **decimals:**
-   - Overrides the `decimals` function from the ERC20 contract to return the number of decimals from the USDC token.
-
-### Summary
-
-The `Staker` contract provides a simple mechanism for users to stake USDC tokens and receive `STK` tokens in return, which represent their stake. Users can later redeem their `STK` tokens for USDC. The contract includes safety checks to ensure valid operations and emits events for transparency and tracking. 
+- **Function:** `redeem()`
+  - **Purpose:** Allows users to redeem their Staker tokens for USDC. It burns the user's Staker tokens and transfers an equivalent amount of USDC back to them.
+  - **Checks:**
+    - Ensures that the user has a non-zero balance of Staker tokens.

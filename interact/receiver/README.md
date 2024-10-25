@@ -1,62 +1,13 @@
-# List of all functions in the `Receiver` contract that access parameters, along with their visibility (`public`, `external`, or `internal`):
+# Overview of Functions in the `Receiver` Contract
 
-### Functions and Their Parameters
+## **Constructor**
 
-1. **Constructor**
-   - **Parameters:** 
-     - `address _router`
-     - `address _usdcToken`
-     - `address _staker`
-   - **Visibility:** No specific visibility modifier (constructor)
+- **Function:** `constructor(address _router, address _usdcToken, address _staker)`
+- **Purpose:** Initializes the contract with specific addresses for the router, USDC token, and staker contract. It also approves the staker to spend USDC tokens on behalf of the contract.
 
-2. **setSenderForSourceChain**
-   - **Parameters:**
-     - `uint64 _sourceChainSelector`
-     - `address _sender`
-   - **Visibility:** `external` (only callable by the owner)
+## **Sender Management Functions**
 
-3. **deleteSenderForSourceChain**
-   - **Parameters:**
-     - `uint64 _sourceChainSelector`
-   - **Visibility:** `external` (only callable by the owner)
-
-4. **ccipReceive**
-   - **Parameters:**
-     - `Client.Any2EVMMessage calldata any2EvmMessage`
-   - **Visibility:** `external` (override, callable only by the router)
-
-5. **processMessage**
-   - **Parameters:**
-     - `Client.Any2EVMMessage calldata any2EvmMessage`
-   - **Visibility:** `external` (only callable from within the contract)
-
-6. **_ccipReceive**
-   - **Parameters:**
-     - `Client.Any2EVMMessage memory any2EvmMessage`
-   - **Visibility:** `internal` (override)
-
-7. **retryFailedMessage**
-   - **Parameters:**
-     - `bytes32 messageId`
-     - `address beneficiary`
-   - **Visibility:** `external` (only callable by the owner)
-
-8. **getFailedMessages**
-   - **Parameters:**
-     - `uint256 offset`
-     - `uint256 limit`
-   - **Visibility:** `external` (read-only function)
-
-### Summary of Function Access
-- **Owner Functions:** The following functions can only be called by the contract owner:
-  - `setSenderForSourceChain`
-  - `deleteSenderForSourceChain`
-  - `retryFailedMessage`
-
-- **Router Function:** 
-  - `ccipReceive` is specifically called by the CCIP router.
-
-- **Internal and Public Functions:**
-  - `processMessage` is callable only from within the contract.
-  - `_ccipReceive` is internal and used for handling received messages.
-  
+- **Function:** `setSenderForSourceChain(uint64 _sourceChainSelector, address _sender)`
+  - **Purpose:** Sets the sender contract for a specified source chain. Only callable by the owner.
+- **Function:** `deleteSenderForSourceChain(uint64 _sourceChainSelector)`
+  - **Purpose:** Deletes the sender contract for a specified source chain. Only callable by the owner.
