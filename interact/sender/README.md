@@ -1,14 +1,36 @@
-# Overview of Functions in the `Receiver` Contract
+# Overview of Functions in the `Sender` Contract
 
 ## **Constructor**
 
-- **Function:** `constructor(address _router, address _usdcToken, address _staker)`
-  - **Purpose:** Initializes the contract with specific addresses for the router, USDC token, and staker contract. It also approves the staker to spend USDC tokens on behalf of the contract.
+- **Function:** `constructor(address _router, address _link, address _usdcToken)`
+- **Purpose:** Initializes the contract with addresses for the router, LINK token, and USDC token.
 
-## **Sender Management Functions**
+## **Set Receiver for Destination Chain**
 
-- **Function:** `setSenderForSourceChain(uint64 _sourceChainSelector, address _sender)`
-  - **Purpose:** Sets the sender contract for a specified source chain. Only callable by the owner.
-  
-- **Function:** `deleteSenderForSourceChain(uint64 _sourceChainSelector)`
-  - **Purpose:** Deletes the sender contract for a specified source chain. Only callable by the owner.
+- **Function:** `setReceiverForDestinationChain(uint64 _destinationChainSelector, address _receiver)`
+- **Purpose:** Sets the receiver contract for a specified destination chain (only callable by the owner).
+
+## **Set Gas Limit for Destination Chain**
+
+- **Function:** `setGasLimitForDestinationChain(uint64 _destinationChainSelector, uint256 _gasLimit)`
+- **Purpose:** Configures the gas limit for a specified destination chain (only callable by the owner).
+
+## **Delete Receiver for Destination Chain**
+
+- **Function:** `deleteReceiverForDestinationChain(uint64 _destinationChainSelector)`
+- **Purpose:** Removes the receiver contract for a specified destination chain (only callable by the owner).
+
+## **Send Message and Pay in LINK**
+
+- **Function:** `sendMessagePayLINK(uint64 _destinationChainSelector, address _beneficiary, uint256 _amount)`
+- **Purpose:** Sends data and transfers tokens to a receiver on the destination chain while paying fees in LINK.
+
+## **Withdraw LINK Tokens**
+
+- **Function:** `withdrawLinkToken(address _beneficiary)`
+- **Purpose:** Allows the owner to withdraw all LINK tokens from the contract to a specified beneficiary.
+
+## **Withdraw USDC Tokens**
+
+- **Function:** `withdrawUsdcToken(address _beneficiary)`
+- **Purpose:** Allows the owner to withdraw all USDC tokens from the contract to a specified beneficiary.
